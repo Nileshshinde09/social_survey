@@ -101,5 +101,5 @@ if __name__=="__main__":
                         st.download_button('Download CSV',
                                             data=f,
                                             file_name='social_survey.csv',)             
-            if password !=os.environ["realpass1"] or password!=os.environ["realpass2"]:
+            if password !=os.environ["realpass1"] and password!=os.environ["realpass2"]:
                 st.warning("Wrong Password")
