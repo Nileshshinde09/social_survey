@@ -10,11 +10,15 @@ def connect():
     except Exception as e:
         print(f"Error Occured while connecting to database :: {e}") 
 def insert_data(surveylst):
-    conn,c=connect()
-    with conn:
-        c.execute("insert into surveytable values (:username, :userage, :social_platform, :violent_speech, :hateful_speech ,:harmful_speech, :spam_misleading_speech ,:language)", 
-                  {'username': surveylst[0], 'userage':surveylst[1] , 'social_platform':surveylst[2] , 'violent_speech':surveylst[3] , 'hateful_speech':surveylst[4] ,'harmful_speech':surveylst[5], 'spam_misleading_speech':surveylst[6] , 'language':surveylst[7]})
-     
+    try:
+        conn,c=connect()
+        with conn:
+            c.execute("insert into surveytable values (:username, :userage, :social_platform, :violent_speech, :hateful_speech ,:harmful_speech, :spam_misleading_speech ,:language)", 
+                    {'username': surveylst[0], 'userage':surveylst[1] , 'social_platform':surveylst[2] , 'violent_speech':surveylst[3] , 'hateful_speech':surveylst[4] ,'harmful_speech':surveylst[5], 'spam_misleading_speech':surveylst[6] , 'language':surveylst[7]})
+        return 1
+    except Exception as e:
+        print(f"Error Occured while inserting the data :: {e}")
+        return -1 
 def showDf():
     conn,c=connect()
     try:
@@ -47,5 +51,9 @@ def getSurvey(name='',userage='',social_platform='',violent_speech='',hateful_sp
     if spam_misleading_speech=='':
         spam_misleading_speech='empty'
     surveylst = [name,userage,social_platform,violent_speech,hateful_speech,harmful_speech,spam_misleading_speech,language]
-    insert_data(surveylst)
+    
+    if insert_data(surveylst):
+        return 1
+    else:
+        return -1
 

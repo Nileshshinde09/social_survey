@@ -83,8 +83,9 @@ if __name__=="__main__":
         spam_misleading_speech= str(st.text_input("",placeholder="spam or mesleading sentence/word"))
         if st.button("Submit",key=1):
             if(violent_speech =='' and harmful_speech=='' and harmful_speech==''and spam_misleading_speech==''):
-                st.error("You need to fill atlest one field")
-            getSurvey(fname,int(age),socialPlatform,violent_speech,hateful_speech,harmful_speech,spam_misleading_speech,language)
+                st.error("You need to fill atleast one field")
+            if getSurvey(fname,int(age),socialPlatform,violent_speech,hateful_speech,harmful_speech,spam_misleading_speech,language):
+                st.success("submission successful")
 
 
     if menu=='Admin':
